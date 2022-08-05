@@ -1,0 +1,53 @@
+﻿@model IEnumerable<SalesPoint.Models.Categoria>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Lista de categorias</h2>
+        </div>
+        <div class="col-6 text-center m-auto">
+            <a class="btn btn-info text-white" asp-controller="Categoria" asp-action="Agregar">Agregar categoria</a>
+        </div>
+
+        @if (Model.Count() > 0) {
+            <table class="table table-bordered table-striped mt-4" style="width:100%;">
+                <thead class="text-center">
+                    <tr>
+                        <th>ID</th>
+                        <th>Categoria</th>
+                        <th>Orden</th>
+                        <th class="w-25">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model) {
+                        <tr>
+                            <td class="m-auto">@item.Id</td>
+                            <td>@item.NombreCategoria</td>
+                            <td>@item.MostrarOrden</td>
+                            <td class="text-center">
+                                <div class="btn-group" role="group">
+                                    <a asp-controller="Categoria" asp-action="Editar" asp-route-Id="@item.Id" class="btn btn-outline-info mx-2">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </a>
+                                    <a asp-controller="Categoria" asp-action="Eliminar" asp-route-Id="@item.Id" class="btn btn-outline-danger mx-2">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        } else {
+            <h3 class="text-danger text-center mt-4">No se han encontrado registros</h3>
+        }
+
+    </div>
+</div>
+

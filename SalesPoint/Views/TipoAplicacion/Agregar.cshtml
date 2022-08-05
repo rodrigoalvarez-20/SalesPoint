@@ -1,0 +1,29 @@
+﻿@model SalesPoint.Models.TipoAplicacion
+
+@{
+    ViewData["Title"] = "Agregar Tipo Aplicacion";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form method="post" asp-action="Agregar" class="m-auto mt-4 p-3" style="max-width:80%">
+    <div class="border p-3">
+        <div class="form-group row">
+            <h2 class="text-info pl-3">Categoria</h2>
+        </div>
+        <div class="container">
+            <div class="row  mb-3">
+                <div class="col-md-6">
+                    <label asp-for="NombreAplicacion" class="form-label">Nombre del tipo de aplicacion</label>
+                    <input asp-for="NombreAplicacion" class="form-control" />
+                </div>
+            </div>
+            <div class="d-grid gap-2 d-md-block m-auto">
+                <button type="submit" class="btn btn-success ms-2 me-2" style="min-width:92px;">Crear</button>
+                <a asp-controller="TipoAplicacion" asp-action="Index" class="btn btn-secondary ms-2 me-2" style="min-width:92px;">Regresar</a>
+            </div>
+
+        </div>
+    </div>
+
+</form>
+
