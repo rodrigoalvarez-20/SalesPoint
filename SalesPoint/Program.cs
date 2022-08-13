@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SalesPoint.Datos;
 
@@ -10,6 +11,17 @@ builder.Services.AddDbContext<AppDbContext>(options => {
 });
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddSession(options => {
+	options.IdleTimeout = TimeSpan.FromMinutes(10);
+	options.Cookie.HttpOnly = true;
+	options.Cookie.IsEssential = true;
+});
+
+builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+	.AddDefaultTokenProviders()
+	.AddDefaultUI()
+	.AddEntityFrameworkStores<AppDbContext>();
 
 var app = builder.Build();
 
@@ -25,7 +37,13 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
+
 app.UseAuthorization();
+
+app.UseSession();
+
+app.MapRazorPages();
 
 app.MapControllerRoute(
 	name: "default",

@@ -1,0 +1,94 @@
+﻿@model SalesPoint.Models.Producto
+@{
+
+    ViewData["Title"] = "Eliminar Producto";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<form method="post" asp-action="Eliminar" enctype="multipart/form-data" class="m-auto mt-4 p-3" style="max-width:80%">
+    <input asp-for="Id" hidden />
+    <div class="border p-3">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
+            <h2 class="text-info">Eliminar producto</h2>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="container">
+                    <div class="row mb-2">
+                        <div class="col-xs-12 col-sm-6 col-md-4 mb-2">
+                            <label asp-for="Name" class="form-label">Nombre producto</label>
+                            <input asp-for="Name" class="form-control" disabled />
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4 mb-2">
+                            <label asp-for="Precio" class="form-label">Precio</label>
+                            <input asp-for="Precio" class="form-control" disabled />
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4 mb-2">
+                            <label asp-for="DescripcionCorta" class="form-label">Descripcion corta</label>
+                            <input asp-for="DescripcionCorta" class="form-control" disabled />
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="row m-auto mb-2">
+                                <label asp-for="CategoriaId" class="form-label">Categoria</label>
+                                <input asp-for="CategoriaId" hidden class="form-select" />
+                                <input asp-for="Categoria.NombreCategoria" class="form-control" disabled />
+                            </div>
+                            <div class="row m-auto mb-2">
+                                <label asp-for="TipoAplicacionId" class="form-label">Tipo</label>
+                                <input asp-for="TipoAplicacionId" hidden class="form-select" />
+                                <input asp-for="TipoAplicacion.NombreAplicacion" class="form-control" disabled />
+
+                            </div>
+                            <div class="row m-auto mb-2">
+                                @{
+                                    if (Model.UrlImagen != null && Model.UrlImagen != "") {
+                                        <img id="imgPreview" src="@WebConstants.ProductImagesRoute@Model.UrlImagen"
+                                         style="width: 100%; height: 160px; object-fit: contain;" />
+                                    }
+                                }
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 mb-2">
+                            <label asp-for="DescripcionProducto" class="form-label">Descripcion del producto</label>
+                            <textarea rows="4" asp-for="DescripcionProducto" class="form-control summernote" disabled></textarea>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-xs-12 col-md-6 mb-2" hidden>
+                            <label asp-for="UrlImagen" class="form-label">Imagen del producto</label>
+                            <input asp-for="UrlImagen" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="d-grid gap-2 d-md-block m-auto">
+                            <button type="submit" class="btn btn-danger ms-2 me-2" style="min-width:92px;">Eliminar</button>
+                            <a asp-controller="Producto" asp-action="Index" class="btn btn-secondary ms-2 me-2" style="min-width:92px;">Regresar</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</form>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+
+    <script>
+
+        $(document).ready(() => {
+            $('.summernote').summernote("disable");
+        })
+
+    </script>
+
+}

@@ -21,17 +21,17 @@ namespace SalesPoint.Models {
 		[Range(1, double.MaxValue, ErrorMessage = "El precio debe de ser mayor a 0")]
 		public double Precio { get; set; }
 
-		public string UrlImagen { get; set; }
+		public string? UrlImagen { get; set; }
 
 		// Foreign Keys
 
 		public int CategoriaId { get; set; }
 		[ForeignKey("CategoriaId")]
-		public virtual Categoria Categoria { get; set; }
+		public virtual Categoria? Categoria { get; set; }
 
 		public int TipoAplicacionId { get; set; }
 		[ForeignKey("TipoAplicacionId")]
-		public virtual TipoAplicacion TipoAplicacion { get; set; }
+		public virtual TipoAplicacion? TipoAplicacion { get; set; }
 
 	}
 }

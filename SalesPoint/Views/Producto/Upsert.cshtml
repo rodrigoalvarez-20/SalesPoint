@@ -1,16 +1,16 @@
-﻿@model SalesPoint.Models.Producto
+﻿@model SalesPoint.Models.VewModels.ProductoVM
 @{
 
-    var titulo = Model.Id != 0 ? "Editar producto" : "Crear nuevo producto";
-
+    var titulo = Model.Producto.Id != 0 ? "Editar producto" : "Crear nuevo producto";
+    var hidePreview = true;
     ViewData["Title"] = titulo;
     Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
 
 <form method="post" asp-action="Upsert" enctype="multipart/form-data" class="m-auto mt-4 p-3" style="max-width:80%">
-    @if (Model.Id != 0) {
-        <input asp-for="Id" hidden />
+    @if (Model.Producto.Id != 0) {
+        <input asp-for="Producto.Id" hidden />
     }
 
     <div class="border p-3">
@@ -23,59 +23,60 @@
                 <div class="container">
                     <div class="row mb-2">
                         <div class="col-xs-12 col-sm-6 col-md-4 mb-2">
-                            <label asp-for="Name" class="form-label">Nombre producto</label>
-                            <input asp-for="Name" class="form-control" />
-                            <span asp-validation-for="Name" class="text-danger"></span>
+                            <label asp-for="Producto.Name" class="form-label">Nombre producto</label>
+                            <input asp-for="Producto.Name" class="form-control" />
+                            <span asp-validation-for="Producto.Name" class="text-danger"></span>
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-4 mb-2">
-                            <label asp-for="Precio" class="form-label">Precio</label>
-                            <input asp-for="Precio" class="form-control" />
-                            <span asp-validation-for="Name" class="text-danger"></span>
+                            <label asp-for="Producto.Precio" class="form-label">Precio</label>
+                            <input asp-for="Producto.Precio" class="form-control" />
+                            <span asp-validation-for="Producto.Name" class="text-danger"></span>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-4 mb-2">
-                            <label asp-for="DescripcionCorta" class="form-label">Descripcion corta</label>
-                            <input asp-for="DescripcionCorta" class="form-control" />
-                            <span asp-validation-for="DescripcionCorta" class="text-danger"></span>
+                            <label asp-for="Producto.DescripcionCorta" class="form-label">Descripcion corta</label>
+                            <input asp-for="Producto.DescripcionCorta" class="form-control" />
+                            <span asp-validation-for="Producto.DescripcionCorta" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row mb-2">
                         <div class="col-xs-12 col-sm-6">
                             <div class="row m-auto mb-2">
-                                <label asp-for="CategoriaId" class="form-label">Categoria</label>
-                                <select asp-for="CategoriaId" asp-items="@ViewBag.dwCategoria" class="form-select">
+                                <label asp-for="Producto.CategoriaId" class="form-label">Categoria</label>
+                                <select asp-for="Producto.CategoriaId" asp-items="@Model.CategoriaLista" class="form-select">
                                     <option disabled selected>Seleccione la categoria</option>
                                 </select>
                             </div>
                             <div class="row m-auto mb-2">
-                                <label asp-for="CategoriaId" class="form-label">Tipo</label>
-                                <select asp-for="CategoriaId" asp-items="@ViewBag.dwCategoria" class="form-select">
-                                    <option disabled selected>Seleccione la categoria</option>
+                                <label asp-for="Producto.TipoAplicacionId" class="form-label">Tipo</label>
+                                <select asp-for="Producto.TipoAplicacionId" asp-items="@Model.TipoAplicacionLista" class="form-select">
+                                    <option disabled selected>Seleccione el tipo de aplicacion</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-6 mb-2">
-                            <label asp-for="DescripcionProducto" class="form-label">Descripcion del producto</label>
-                            <textarea rows="4" asp-for="DescripcionProducto" class="form-control"></textarea>
-                            <span asp-validation-for="DescripcionProducto" class="text-danger"></span>
+                            <label asp-for="Producto.DescripcionProducto" class="form-label">Descripcion del producto</label>
+                            <textarea rows="4" asp-for="Producto.DescripcionProducto" class="form-control summernote"></textarea>
+                            <span asp-validation-for="Producto.DescripcionProducto" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <div class="col-xs-12 col-sm-6 mb-2">
-                            <label asp-for="UrlImagen" class="form-label">Imagen del producto</label>
-                            <input type="file" name="files" id="imagenId" class="form-control" />
+                        <div class="col-xs-12 col-md-6 mb-2">
+                            <label asp-for="Producto.UrlImagen" class="form-label">Imagen del producto</label>
+                            <input type="file" name="files" id="imagenId" class="form-control" onchange="test(this.files)" />
                         </div>
-                        <div class="col-xs-12 col-sm-6 mb-2">
-                            Preview
+                        <div class="col-xs-12 col-md-6 mb-2">
+                            <img id="imgPreview" src="@WebConstants.ProductImagesRoute@Model.Producto.UrlImagen"
+                                 style="width: 100%; height: 160px; object-fit: contain;" hidden="@hidePreview" />
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="d-grid gap-2 d-md-block m-auto">
-                            @if (Model.Id != 0) {
+                            @if (Model.Producto.Id != 0) {
                                 <button type="submit" class="btn btn-success ms-2 me-2" style="min-width:92px;">Guardar cambios</button>
                             } else {
-                                <button type="submit" class="btn btn-success ms-2 me-2" style="min-width:92px;">Añadir</button>
+                                <button type="submit" onclick="return validarImagen()" class="btn btn-success ms-2 me-2" style="min-width:92px;">Añadir</button>
                             }
-                            <a asp-controller="Categoria" asp-action="Index" class="btn btn-secondary ms-2 me-2" style="min-width:92px;">Regresar</a>
+                            <a asp-controller="Producto" asp-action="Index" class="btn btn-secondary ms-2 me-2" style="min-width:92px;">Regresar</a>
                         </div>
                     </div>
                 </div>
@@ -87,3 +88,42 @@
 
 </form>
 
+@section Scripts {
+    @{
+    <partial name="_ValidationScriptsPartial" />
+    }
+
+    <script>
+
+        $(document).ready(() => {
+            $('.summernote').summernote({
+                height: 250
+            });
+        })
+
+        function test(files) {
+            if (files.length > 0) {
+                var selectedFile = files[0];
+                hidePreview = false;
+                document.getElementById("imgPreview").src = URL.createObjectURL(selectedFile);
+
+            }
+        }
+
+        function validarImagen() {
+            var imgSelector = document.getElementById("imagenId");
+            if (imageSelector.value == "") {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Por favor seleccione una imagen',
+                    icon: 'error',
+                    confirmButtonText: 'Aceptar'
+                });
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+
+}

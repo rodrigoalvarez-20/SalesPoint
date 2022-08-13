@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using SalesPoint.Models;
 
 namespace SalesPoint.Datos {
-	public class AppDbContext : DbContext {
+	public class AppDbContext : IdentityDbContext {
 		public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { 
 		
 		}
@@ -13,6 +14,8 @@ namespace SalesPoint.Datos {
 		public DbSet<TipoAplicacion> TipoAplicacion { get; set; }
 
 		public DbSet<Producto> Producto { get; set; }
+
+		public DbSet<UsuarioAplicacion> UsuarioAplicacion { get; set; }
 
 	}
 }
