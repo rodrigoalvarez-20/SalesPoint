@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\rodri\\source\\repos\\SalesPoint\\SalesPoint\\SalesPoint.csproj": {}
+    "/Users/ralvarez20/Documents/Proyects/SalesPoint/SalesPoint/SalesPoint.csproj": {}
   },
   "projects": {
-    "C:\\Users\\rodri\\source\\repos\\SalesPoint\\SalesPoint\\SalesPoint.csproj": {
+    "/Users/ralvarez20/Documents/Proyects/SalesPoint/SalesPoint/SalesPoint.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\rodri\\source\\repos\\SalesPoint\\SalesPoint\\SalesPoint.csproj",
+        "projectUniqueName": "/Users/ralvarez20/Documents/Proyects/SalesPoint/SalesPoint/SalesPoint.csproj",
         "projectName": "SalesPoint",
-        "projectPath": "C:\\Users\\rodri\\source\\repos\\SalesPoint\\SalesPoint\\SalesPoint.csproj",
-        "packagesPath": "C:\\Users\\rodri\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\rodri\\source\\repos\\SalesPoint\\SalesPoint\\obj\\",
+        "projectPath": "/Users/ralvarez20/Documents/Proyects/SalesPoint/SalesPoint/SalesPoint.csproj",
+        "packagesPath": "/Users/ralvarez20/.nuget/packages/",
+        "outputPath": "/Users/ralvarez20/Documents/Proyects/SalesPoint/SalesPoint/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\rodri\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/ralvarez20/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -69,7 +67,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -81,7 +80,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.400/RuntimeIdentifierGraph.json"
         }
       }
     }
